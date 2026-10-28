@@ -1,8 +1,8 @@
-package io.github.untid.simwars2.domain;
+package io.github.untid.simwars2.domain.skill;
 
 public record Hit(double coefficient) {
 
-    public Hit{
+    public Hit {
         if (coefficient <= 0) throw new IllegalArgumentException("Coefficient must be > 0");
     }
 }
