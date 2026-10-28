@@ -1,6 +1,8 @@
-package io.github.untid.simwars2.domain;
+package io.github.untid.simwars2.domain.damage;
 
+import io.github.untid.simwars2.domain.stats.StatSheet;
 import org.junit.jupiter.api.Test;
+
 import static org.assertj.core.api.Assertions.*;
 
 class DamageCalculatorTest {

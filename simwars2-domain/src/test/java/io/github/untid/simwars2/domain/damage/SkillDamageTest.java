@@ -1,7 +1,12 @@
-package io.github.untid.simwars2.domain;
+package io.github.untid.simwars2.domain.damage;
 
+import io.github.untid.simwars2.domain.skill.Hit;
+import io.github.untid.simwars2.domain.skill.Skill;
+import io.github.untid.simwars2.domain.stats.StatSheet;
 import org.junit.jupiter.api.Test;
+
 import java.util.List;
+
 import static org.assertj.core.api.Assertions.*;
 
 class SkillDamageTest {
