@@ -1,4 +1,4 @@
-package io.github.untid.simwars2.domain;
+package io.github.untid.simwars2.domain.stats;
 
 public record StatSheet(int power, int precision, int ferocity) {
     public StatSheet {

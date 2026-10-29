@@ -1,7 +1,8 @@
-package io.github.untid.simwars2.domain;
+package io.github.untid.simwars2.domain.stats;
 
 public final class CritModel {
-    private CritModel() {}
+    private CritModel() {
+    }
 
     public static double critChance(StatSheet s) {
 

@@ -1,6 +1,9 @@
-package io.github.untid.simwars2.domain;
+package io.github.untid.simwars2.domain.stats;
 
+import io.github.untid.simwars2.domain.damage.DamageCalculator;
+import io.github.untid.simwars2.domain.damage.Target;
 import org.junit.jupiter.api.Test;
+
 import static org.assertj.core.api.Assertions.*;
 
 class CritModelTest {

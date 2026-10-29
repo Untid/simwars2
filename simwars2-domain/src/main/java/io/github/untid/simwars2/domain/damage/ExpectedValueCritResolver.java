@@ -1,4 +1,4 @@
-package io.github.untid.simwars2.domain;
+package io.github.untid.simwars2.domain.damage;
 
 public final class ExpectedValueCritResolver implements CritResolver {
 
