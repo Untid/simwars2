@@ -10,6 +10,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>simwars2-domain</module>
+        <module>simwars2-infrastructure</module>
     </modules>
 
     <properties>
@@ -30,6 +31,11 @@
                 <groupId>org.assertj</groupId>
                 <artifactId>assertj-core</artifactId>
                 <version>3.27.7</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>2.22.4</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
