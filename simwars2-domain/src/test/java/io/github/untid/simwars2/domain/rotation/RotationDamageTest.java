@@ -1,5 +1,6 @@
 package io.github.untid.simwars2.domain.rotation;
 
+import io.github.untid.simwars2.domain.condition.Vulnerability;
 import io.github.untid.simwars2.domain.damage.CritResolver;
 import io.github.untid.simwars2.domain.damage.ExpectedValueCritResolver;
 import io.github.untid.simwars2.domain.damage.Target;
@@ -41,5 +42,12 @@ class RotationDamageTest {
         double dps = RotationDamage.dps(CADENA, 1000, LOG, GOLEM, EV);
         // log de frente: 2414 DPS. Diferencia esperada ~0,7 %
         assertThat(dps).isCloseTo(2414, withinPercentage(1.0));
+    }
+
+    @Test
+    void dpsConVeinticincoStacks_coincideConElLog() {
+        double dps = RotationDamage.dps(CADENA, 1000, LOG, GOLEM, EV, new Vulnerability(25));
+        // log con 25 stacks: 3006 DPS
+        assertThat(dps).isCloseTo(3006, withinPercentage(1.0));
     }
 }

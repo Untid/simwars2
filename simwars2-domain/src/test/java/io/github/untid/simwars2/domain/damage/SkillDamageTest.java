@@ -1,7 +1,9 @@
 package io.github.untid.simwars2.domain.damage;
 
+import io.github.untid.simwars2.domain.condition.Vulnerability;
 import io.github.untid.simwars2.domain.skill.Hit;
 import io.github.untid.simwars2.domain.skill.Skill;
+import io.github.untid.simwars2.domain.stats.CritModel;
 import io.github.untid.simwars2.domain.stats.StatSheet;
 import org.junit.jupiter.api.Test;
 
@@ -53,5 +55,33 @@ class SkillDamageTest {
         }
         // log de frente: 8690 por cadena. Tolerancia 1 %
         assertThat(total).isCloseTo(8690, withinPercentage(1.0));
+    }
+
+    @Test
+    void sinVulnerabilidad_equivaleALaSobrecargaAntigua() {
+        double antigua = SkillDamage.expected(TRIPLE, 1000, LOG, GOLEM, EV);
+        double nueva = SkillDamage.expected(TRIPLE, 1000, LOG, GOLEM, EV,
+                new Vulnerability(0));
+        assertThat(nueva).isEqualTo(antigua);
+    }
+
+    @Test
+    void conVeinticincoStacks_escalaElDanoUnVeinticincoPorCiento() {
+        double base = SkillDamage.expected(TRIPLE, 1000, LOG, GOLEM, EV);
+        double vuln = SkillDamage.expected(TRIPLE, 1000, LOG, GOLEM, EV,
+                new Vulnerability(25));
+        assertThat(vuln).isCloseTo(base * 1.25, within(1e-9));
+    }
+
+    @Test
+    void cortar_conVeinticincoStacks_coincideConElLog() {
+        //log con 25 stacks de Vulnerabilidad, parche X
+        double min = DamageCalculator.normalHit(900, LOG, 0.7, GOLEM)
+                * new Vulnerability(25).multiplier();
+        double max = DamageCalculator.normalHit(1100, LOG, 0.7, GOLEM)
+                * CritModel.critMultiplier(LOG)
+                * new Vulnerability(25).multiplier();
+        assertThat(Math.floor(min)).isEqualTo(775.0);
+        assertThat(Math.floor(max)).isEqualTo(2169.0);
     }
 }
