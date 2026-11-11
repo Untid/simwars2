@@ -1,5 +1,6 @@
 package io.github.untid.simwars2.domain.rotation;
 
+import io.github.untid.simwars2.domain.condition.Vulnerability;
 import io.github.untid.simwars2.domain.damage.CritResolver;
 import io.github.untid.simwars2.domain.damage.SkillDamage;
 import io.github.untid.simwars2.domain.damage.Target;
@@ -13,16 +14,26 @@ public final class RotationDamage {
 
     public static double cycleDamage(Rotation rotation, double weaponStrength, StatSheet statSheet, Target t, CritResolver critResolver) {
 
+        return cycleDamage(rotation, weaponStrength, statSheet, t, critResolver, new Vulnerability(0));
+    }
+
+    public static double cycleDamage(Rotation rotation, double weaponStrength, StatSheet statSheet, Target t, CritResolver critResolver, Vulnerability vulnerability) {
+
         double total = 0;
 
         for (Skill s : rotation.skills()) {
-            total += SkillDamage.expected(s, weaponStrength, statSheet, t, critResolver);
+            total += SkillDamage.expected(s, weaponStrength, statSheet, t, critResolver, vulnerability);
         }
         return total;
     }
 
     public static double dps(Rotation rotation, double weaponStrength, StatSheet statSheet, Target t, CritResolver critResolver) {
 
-        return cycleDamage(rotation, weaponStrength, statSheet, t, critResolver) / rotation.cycleSeconds();
+        return dps(rotation, weaponStrength, statSheet, t, critResolver, new Vulnerability(0));
+    }
+
+    public static double dps(Rotation rotation, double weaponStrength, StatSheet statSheet, Target t, CritResolver critResolver, Vulnerability vulnerability) {
+
+        return cycleDamage(rotation, weaponStrength, statSheet, t, critResolver, vulnerability) / rotation.cycleSeconds();
     }
 }
